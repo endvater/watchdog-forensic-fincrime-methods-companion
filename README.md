@@ -1,26 +1,26 @@
 # Watchdog Forensic Fincrime Methods Companion
 
-Companion repo fuer die Watchdog-Serie `Forensic Fincrime`.
+Companion repo für die Watchdog-Serie `Forensic Fincrime`.
 
 Dieses Repo ist bewusst kleiner als das interne Arbeitsrepo. Es soll
 interessierten Lesern helfen, die methodische Logik hinter den Artikeln
 nachzuvollziehen, ohne interne Arbeitsdateien, Credentials oder private
-Zwischenstaende offenzulegen.
+Zwischenstände offenzulegen.
 
-## Was dieses Repo enthaelt
+## Was dieses Repo enthält
 
-- einen oeffentlichen Serienkatalog fuer die aktuellen Artikel
+- einen öffentlichen Serienkatalog für die aktuellen Artikel
 - nachvollziehbare technische Steckbriefe pro Artikel
-- ein kleines SQLite-Demo-Setup fuer Serieninventar und Datensatzabdeckung
-- Neo4j-Seed-Exports fuer einfache Artikel-Datensatz-Graphen
-- Beispielqueries fuer SQLite und Cypher
+- ein kleines SQLite-Demo-Setup für Serieninventar und Datensatzabdeckung
+- Neo4j-Seed-Exports für einfache Artikel-Datensatz-Graphen
+- Beispielqueries für SQLite und Cypher
 - Dokumentation zu Architektur, Grenzen und Release-Vorbereitung
 
-## Was dieses Repo bewusst nicht enthaelt
+## Was dieses Repo bewusst nicht enthält
 
 - Credentials oder API-Keys
 - interne WordPress- oder Redaktionswerkzeuge
-- private HTML-Snapshots, Arbeitsnotizen oder Entwurfsstaende
+- private HTML-Snapshots, Arbeitsnotizen oder Entwurfsstände
 - Redistribution von Leak-Daten oder Drittanbieter-Datasets
 - lokale Arbeitsplatzpfade
 
@@ -51,11 +51,11 @@ docker compose up -d neo4j
 
 Danach kann `queries/cypher/load_seed.cypher` im Neo4j Browser geladen werden.
 Das Setup bindet Neo4j absichtlich nur an `127.0.0.1` und nutzt `NEO4J_AUTH=none`
-nur fuer lokale Entwicklung.
+nur für lokale Entwicklung.
 
 ## Artikel in der Serie
 
-- [Panama Paradox](https://watchdog.endvater.de/2026/02/panama-paradox-2/)
+- [Panama Paradox](https://watchdog.endvater.de/2026/03/panama-paradox-2/)
 - [Panama Paradox II: OpenSanctions x ICIJ](https://watchdog.endvater.de/2026/04/panama-paradox-ii-opensanctions-icij/)
 - [Die Weltkarte der Compliance-Schande](https://watchdog.endvater.de/2026/03/die-weltkarte-der-compliance-schande/)
 - [Die Shell-Company-Fabrik](https://watchdog.endvater.de/2026/03/die-shell-company-fabrik/)
@@ -64,14 +64,14 @@ nur fuer lokale Entwicklung.
 
 ## Repo-Prinzip
 
-Das oeffentliche Companion Repo ist kein Vollabzug des internen
+Das öffentliche Companion Repo ist kein Vollabzug des internen
 Investigations-Setups. Es ist die kuratierte, leserfreundliche Seite der
 Recherche:
 
-1. oeffentliche Methode
+1. öffentliche Methode
 2. reproduzierbare Struktur
 3. klare Grenzen bei Daten, Lizenzen und internen Arbeitsartefakten
 
 Die Trennlinie ist in [docs/publication_boundary.md](docs/publication_boundary.md)
-dokumentiert. Vor einer echten Oeffentlichmachung sollte ausserdem die
+dokumentiert. Vor einer echten Öffentlichmachung sollte außerdem die
 [Release-Checkliste](docs/release_checklist.md) abgearbeitet werden.
