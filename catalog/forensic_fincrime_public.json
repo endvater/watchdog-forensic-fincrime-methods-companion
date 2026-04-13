@@ -1,0 +1,399 @@
+{
+  "series": {
+    "id": "forensic_fincrime",
+    "title": "Forensic Fincrime",
+    "description": "Data-driven Watchdog series about leak graphs, screening, registry forensics and monitoring systems.",
+    "series_url": "https://watchdog.endvater.de/forensic-fincrime/"
+  },
+  "datasets": [
+    {
+      "id": "icij_offshore_leaks",
+      "name": "ICIJ Offshore Leaks",
+      "category": "leak_graph",
+      "access_mode": "manual_public_download",
+      "source_url": "https://offshoreleaks.icij.org/pages/database",
+      "manual_drop_path": "data/manual_drop/icij_offshore_leaks/",
+      "notes": "Core leak dataset for the Panama Paradox line of work."
+    },
+    {
+      "id": "opensanctions_snapshot",
+      "name": "OpenSanctions Snapshot",
+      "category": "screening",
+      "access_mode": "manual_public_download",
+      "source_url": "https://www.opensanctions.org/",
+      "manual_drop_path": "data/manual_drop/opensanctions/",
+      "notes": "Used for sanctions, watchlist and screening cross-matching."
+    },
+    {
+      "id": "transparency_cpi_2025",
+      "name": "Transparency International CPI 2025",
+      "category": "country_risk",
+      "access_mode": "public_download",
+      "source_url": "https://www.transparency.org/",
+      "manual_drop_path": "data/manual_drop/transparency_cpi_2025/",
+      "notes": "One layer in the multi-source country risk map."
+    },
+    {
+      "id": "fatf_round4_oct2025",
+      "name": "FATF Round 4 and October 2025 Status",
+      "category": "supervisory",
+      "access_mode": "public_download",
+      "source_url": "https://www.fatf-gafi.org/",
+      "manual_drop_path": "data/manual_drop/fatf_round4_oct2025/",
+      "notes": "Used for supervisory and mutual-evaluation context."
+    },
+    {
+      "id": "world_bank_debarments",
+      "name": "World Bank Debarments",
+      "category": "watchlist",
+      "access_mode": "public_download",
+      "source_url": "https://www.worldbank.org/en/projects-operations/procurement/debarred-firms",
+      "manual_drop_path": "data/manual_drop/world_bank_debarments/",
+      "notes": "Additional exclusion-list layer for country comparison."
+    },
+    {
+      "id": "companies_house",
+      "name": "UK Companies House",
+      "category": "registry",
+      "access_mode": "public_download",
+      "source_url": "https://download.companieshouse.gov.uk/",
+      "manual_drop_path": "data/manual_drop/companies_house/",
+      "notes": "Registry layer for shell-company and beneficial-ownership work."
+    },
+    {
+      "id": "nca_hammerhead",
+      "name": "NCA Operation Hammerhead Materials",
+      "category": "enforcement",
+      "access_mode": "manual_public_download",
+      "source_url": "https://www.nationalcrimeagency.gov.uk/",
+      "manual_drop_path": "data/manual_drop/nca_hammerhead/",
+      "notes": "Enforcement material used to frame the UK shell-company story."
+    },
+    {
+      "id": "elliptic_bitcoin_dataset",
+      "name": "Elliptic Bitcoin Dataset",
+      "category": "blockchain_graph",
+      "access_mode": "manual_download",
+      "source_url": "https://www.kaggle.com/",
+      "manual_drop_path": "data/manual_drop/elliptic_bitcoin/",
+      "notes": "Bitcoin graph benchmark typically acquired manually via Kaggle."
+    },
+    {
+      "id": "ibm_it_aml_hi_small",
+      "name": "IBM IT-AML HI-Small",
+      "category": "synthetic_transactions",
+      "access_mode": "manual_download",
+      "source_url": "https://www.kaggle.com/",
+      "manual_drop_path": "data/manual_drop/ibm_it_aml_hi_small/",
+      "notes": "Synthetic AML transaction dataset used for SAR workflow analysis."
+    }
+  ],
+  "query_templates": [
+    {
+      "id": "sql_article_inventory",
+      "engine": "sqlite",
+      "title": "Article Inventory",
+      "file_path": "queries/sqlite/article_inventory.sql",
+      "goal": "Show series order, dataset reuse and public reproducibility level."
+    },
+    {
+      "id": "sql_dataset_coverage",
+      "engine": "sqlite",
+      "title": "Dataset Coverage",
+      "file_path": "queries/sqlite/dataset_coverage.sql",
+      "goal": "Show which datasets appear across how many series pieces."
+    },
+    {
+      "id": "sql_reproducibility_matrix",
+      "engine": "sqlite",
+      "title": "Reproducibility Matrix",
+      "file_path": "queries/sqlite/reproducibility_matrix.sql",
+      "goal": "Show which articles are public-method, manual-data or mixed."
+    },
+    {
+      "id": "cypher_article_dataset_graph",
+      "engine": "cypher",
+      "title": "Article Dataset Graph",
+      "file_path": "queries/cypher/article_dataset_graph.cypher",
+      "goal": "Show article-dataset links in the exported Neo4j seed."
+    }
+  ],
+  "articles": [
+    {
+      "id": "panama_paradox",
+      "order": 1,
+      "part_no": 1,
+      "title": "Panama Paradox",
+      "slug": "panama-paradox-2",
+      "published_on": "2026-03-16",
+      "url": "https://watchdog.endvater.de/2026/02/panama-paradox-2/",
+      "angle": "Offshore leaks are not just scandal archives but reusable infrastructure.",
+      "technical_setup": "Full ICIJ Offshore Leaks graph in Neo4j 5.16 with Cypher across entities, officers and intermediaries.",
+      "methodology": "Import all leak components, then compare leak sources, jurisdictions and intermediaries with a focus on repeated structural nodes.",
+      "insight": "Offshore is an organized network with a small number of switching points and a clear geographic division of labor.",
+      "reproducibility": "manual_public_data",
+      "dataset_ids": ["icij_offshore_leaks"],
+      "public_assets": [
+        {
+          "label": "Published article",
+          "kind": "url",
+          "path": "https://watchdog.endvater.de/2026/02/panama-paradox-2/",
+          "status": "available"
+        }
+      ],
+      "reproduction_steps": [
+        {
+          "order": 1,
+          "name": "Acquire the ICIJ graph input manually",
+          "summary": "Place the public leak data export under data/manual_drop/icij_offshore_leaks/.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 2,
+          "name": "Load into Neo4j",
+          "summary": "Map entities, officers and intermediaries to graph nodes and relationships.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 3,
+          "name": "Run structural queries",
+          "summary": "Compare jurisdictions, intermediary concentration and leak-source overlap.",
+          "is_executable": true,
+          "requires_manual_dataset": true
+        }
+      ]
+    },
+    {
+      "id": "panama_paradox_ii",
+      "order": 2,
+      "part_no": 2,
+      "title": "Panama Paradox II: OpenSanctions x ICIJ",
+      "slug": "panama-paradox-ii-opensanctions-icij",
+      "published_on": "2026-04-13",
+      "url": "https://watchdog.endvater.de/2026/04/panama-paradox-ii-opensanctions-icij/",
+      "angle": "Historical leak data remains operationally useful inside current screening systems.",
+      "technical_setup": "ICIJ entity and officer exports plus OpenSanctions snapshot data and exact-name cross-matching.",
+      "methodology": "Use exact matches rather than fuzzy scoring, then split results into high-signal hits and manual-review candidates.",
+      "insight": "Historical offshore structures keep resurfacing inside sanctions, export-control and screening data.",
+      "reproducibility": "mixed_snapshot",
+      "dataset_ids": ["icij_offshore_leaks", "opensanctions_snapshot"],
+      "public_assets": [
+        {
+          "label": "Published article",
+          "kind": "url",
+          "path": "https://watchdog.endvater.de/2026/04/panama-paradox-ii-opensanctions-icij/",
+          "status": "available"
+        }
+      ],
+      "reproduction_steps": [
+        {
+          "order": 1,
+          "name": "Prepare leak and screening names",
+          "summary": "Export comparable entity and officer name fields from ICIJ and OpenSanctions.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 2,
+          "name": "Run exact-match crossmatch",
+          "summary": "Use a conservative exact-name strategy and store result counts by source and category.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 3,
+          "name": "Assess signal quality",
+          "summary": "Separate high-signal hits from names that clearly require manual review.",
+          "is_executable": true,
+          "requires_manual_dataset": true
+        }
+      ]
+    },
+    {
+      "id": "weltkarte_compliance_schande",
+      "order": 3,
+      "part_no": null,
+      "title": "Die Weltkarte der Compliance-Schande",
+      "slug": "die-weltkarte-der-compliance-schande",
+      "published_on": "2026-03-18",
+      "url": "https://watchdog.endvater.de/2026/03/die-weltkarte-der-compliance-schande/",
+      "angle": "Country stories get sharper when multiple conflicting data layers are read together instead of through one index.",
+      "technical_setup": "A layered country view combining TI CPI 2025, FATF status, ICIJ leak exposure and World Bank debarments.",
+      "methodology": "Composite layering instead of one-dimensional country ranking.",
+      "insight": "No single index tells the full story; stronger enablers emerge only when multiple layers are overlaid.",
+      "reproducibility": "manual_public_data",
+      "dataset_ids": ["transparency_cpi_2025", "fatf_round4_oct2025", "world_bank_debarments", "icij_offshore_leaks"],
+      "public_assets": [
+        {
+          "label": "Published article",
+          "kind": "url",
+          "path": "https://watchdog.endvater.de/2026/03/die-weltkarte-der-compliance-schande/",
+          "status": "available"
+        }
+      ],
+      "reproduction_steps": [
+        {
+          "order": 1,
+          "name": "Collect country-level inputs",
+          "summary": "Gather CPI, FATF, World Bank and leak-linked country signals.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 2,
+          "name": "Normalize to one country table",
+          "summary": "Align naming, date context and scale across heterogeneous sources.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 3,
+          "name": "Compare contradiction patterns",
+          "summary": "Highlight countries that look clean on one layer but weak on another.",
+          "is_executable": true,
+          "requires_manual_dataset": true
+        }
+      ]
+    },
+    {
+      "id": "shell_company_fabrik",
+      "order": 4,
+      "part_no": null,
+      "title": "Die Shell-Company-Fabrik",
+      "slug": "die-shell-company-fabrik",
+      "published_on": "2026-03-19",
+      "url": "https://watchdog.endvater.de/2026/03/die-shell-company-fabrik/",
+      "angle": "Shell-company abuse is best understood as registry design plus enforcement weakness, not as a single bad actor story.",
+      "technical_setup": "UK Companies House, ICIJ Offshore Leaks and NCA enforcement material in one registry-forensics frame.",
+      "methodology": "Read register design, shell-company signatures and offshore connections together.",
+      "insight": "The core problem is not openness itself but a registration model that long confused registration with verification.",
+      "reproducibility": "manual_public_data",
+      "dataset_ids": ["companies_house", "icij_offshore_leaks", "nca_hammerhead"],
+      "public_assets": [
+        {
+          "label": "Published article",
+          "kind": "url",
+          "path": "https://watchdog.endvater.de/2026/03/die-shell-company-fabrik/",
+          "status": "available"
+        }
+      ],
+      "reproduction_steps": [
+        {
+          "order": 1,
+          "name": "Acquire the registry and context data",
+          "summary": "Place Companies House and enforcement reference material under data/manual_drop/.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 2,
+          "name": "Build shell-company indicators",
+          "summary": "Define address density, repeat directors, offshore links and enforcement context fields.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 3,
+          "name": "Rank structural enablers",
+          "summary": "Focus on system-level weaknesses rather than one-off anecdotal cases.",
+          "is_executable": true,
+          "requires_manual_dataset": true
+        }
+      ]
+    },
+    {
+      "id": "follow_the_bitcoin",
+      "order": 5,
+      "part_no": null,
+      "title": "Follow the Bitcoin",
+      "slug": "follow-the-bitcoin-wie-krypto-das-aml-system-austrickst",
+      "published_on": "2026-03-20",
+      "url": "https://watchdog.endvater.de/2026/03/follow-the-bitcoin-wie-krypto-das-aml-system-austrickst/",
+      "angle": "Public blockchain visibility does not eliminate AML blind spots at scale.",
+      "technical_setup": "Elliptic Bitcoin data analyzed in Python with graph features, time windows and transition patterns.",
+      "methodology": "Study class distribution, hubs, illicit-to-licit transitions and the size of the unknown zone.",
+      "insight": "The bottleneck is not transaction visibility alone but the operational review layer around it.",
+      "reproducibility": "manual_download_data",
+      "dataset_ids": ["elliptic_bitcoin_dataset"],
+      "public_assets": [
+        {
+          "label": "Published article",
+          "kind": "url",
+          "path": "https://watchdog.endvater.de/2026/03/follow-the-bitcoin-wie-krypto-das-aml-system-austrickst/",
+          "status": "available"
+        }
+      ],
+      "reproduction_steps": [
+        {
+          "order": 1,
+          "name": "Acquire the benchmark dataset manually",
+          "summary": "Download the Elliptic dataset manually and place it under data/manual_drop/elliptic_bitcoin/.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 2,
+          "name": "Build graph features",
+          "summary": "Load edges, features and labels into a simple Python analysis environment.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 3,
+          "name": "Measure the review gap",
+          "summary": "Inspect illicit, licit and unknown transitions instead of just class counts.",
+          "is_executable": true,
+          "requires_manual_dataset": true
+        }
+      ]
+    },
+    {
+      "id": "anatomie_verdachtsmeldung",
+      "order": 6,
+      "part_no": null,
+      "title": "Anatomie Verdachtsmeldung",
+      "slug": "anatomie-verdachtsmeldung-v2-2",
+      "published_on": "2026-02-09",
+      "url": "https://watchdog.endvater.de/2026/02/anatomie-verdachtsmeldung-v2-2/",
+      "angle": "SAR pain sits between alert volumes, rare events and human review capacity.",
+      "technical_setup": "IBM IT-AML HI-Small analyzed in Python and Pandas with HTML/CSS/SVG presentation.",
+      "methodology": "Inspect transaction types, amount clusters, cross-border patterns, hub accounts and a simple alert-to-SAR funnel.",
+      "insight": "False positives are a math problem of rare events before they become an operations problem.",
+      "reproducibility": "manual_download_data",
+      "dataset_ids": ["ibm_it_aml_hi_small"],
+      "public_assets": [
+        {
+          "label": "Published article",
+          "kind": "url",
+          "path": "https://watchdog.endvater.de/2026/02/anatomie-verdachtsmeldung-v2-2/",
+          "status": "available"
+        }
+      ],
+      "reproduction_steps": [
+        {
+          "order": 1,
+          "name": "Acquire the synthetic dataset manually",
+          "summary": "Download IBM IT-AML HI-Small manually and place it under data/manual_drop/ibm_it_aml_hi_small/.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 2,
+          "name": "Generate transaction and alert views",
+          "summary": "Build transaction-type, value-band and cross-border summary tables.",
+          "is_executable": false,
+          "requires_manual_dataset": true
+        },
+        {
+          "order": 3,
+          "name": "Estimate the SAR funnel",
+          "summary": "Model how alert inflation erodes analyst capacity before escalation.",
+          "is_executable": true,
+          "requires_manual_dataset": true
+        }
+      ]
+    }
+  ]
+}

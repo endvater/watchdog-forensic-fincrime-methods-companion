@@ -1,0 +1,15 @@
+services:
+  neo4j:
+    image: neo4j:5.26
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
+    environment:
+      NEO4J_AUTH: none
+    volumes:
+      - ./data/processed/neo4j_seed:/import
+
+# WARNING:
+# This compose file is for local development only.
+# Do not expose it on a public host while NEO4J_AUTH is set to none.

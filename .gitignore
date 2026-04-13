@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/processed/*.db
+data/processed/neo4j_seed/
+outputs/generated/
