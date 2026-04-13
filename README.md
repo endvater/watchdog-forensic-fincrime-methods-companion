@@ -1,4 +1,4 @@
-# Watchdog Forensic Fincrime Companion
+# Watchdog Forensic Fincrime Methods Companion
 
 Companion repo fuer die Watchdog-Serie `Forensic Fincrime`.
 
@@ -27,7 +27,7 @@ Zwischenstaende offenzulegen.
 ## Schnellstart
 
 ```bash
-cd /path/to/watchdog-forensic-fincrime-companion
+cd /path/to/watchdog-forensic-fincrime-methods-companion
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .

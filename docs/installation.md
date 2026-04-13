@@ -3,7 +3,7 @@
 ## 1. Local Python environment
 
 ```bash
-cd /path/to/watchdog-forensic-fincrime-companion
+cd /path/to/watchdog-forensic-fincrime-methods-companion
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
