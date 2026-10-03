@@ -1,0 +1,26 @@
+name: Public demo
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: make bootstrap
+      - name: Verify relational integrity
+        run: |
+          python - <<'PY'
+          import json, sqlite3
+          from pathlib import Path
+          catalog = json.loads(Path('catalog/forensic_fincrime_public.json').read_text())
+          with sqlite3.connect('data/processed/forensic_fincrime_public.db') as db:
+              assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+              assert not db.execute('PRAGMA foreign_key_check').fetchall()
+              assert db.execute('SELECT COUNT(*) FROM articles').fetchone()[0] == len(catalog['articles'])
+              assert db.execute('SELECT COUNT(*) FROM datasets').fetchone()[0] == len(catalog['datasets'])
+          assert Path('outputs/generated/bootstrap_summary.md').is_file()
+          PY
